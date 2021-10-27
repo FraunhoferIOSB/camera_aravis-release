@@ -1,0 +1,12 @@
+Source: ros-noetic-camera-aravis
+Section: misc
+Priority: optional
+Maintainer: Dominik Kleiser, Fraunhofer IOSB <dominik.kleiser@iosb.fraunhofer.de>
+Build-Depends: debhelper (>= 9.0.0), libaravis-0.6-0, libaravis-dev, libglib2.0-dev, ros-noetic-camera-info-manager, ros-noetic-catkin, ros-noetic-dynamic-reconfigure, ros-noetic-image-transport, ros-noetic-message-generation, ros-noetic-nodelet, ros-noetic-roscpp, ros-noetic-sensor-msgs, ros-noetic-std-msgs, ros-noetic-tf, ros-noetic-tf2-ros
+Homepage: https://github.com/FraunhoferIOSB/camera_aravis
+Standards-Version: 3.9.2
+
+Package: ros-noetic-camera-aravis
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libaravis-0.6-0, ros-noetic-camera-info-manager, ros-noetic-dynamic-reconfigure, ros-noetic-image-transport, ros-noetic-message-runtime, ros-noetic-nodelet, ros-noetic-roscpp, ros-noetic-sensor-msgs, ros-noetic-std-msgs, ros-noetic-tf, ros-noetic-tf2-ros
+Description: camera_aravis: A complete and comfortable GenICam (USB3Vision and GigEVision) based camera driver for ROS (ethernet and usb).
