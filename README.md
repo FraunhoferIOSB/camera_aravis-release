@@ -19,6 +19,3 @@ Versions of tools used:
 - rosdep version: `0.21.0`
 - rosdistro version: `0.8.3`
 - vcstools version: `0.1.42`
-
-
-# -camera_aravis-release
