@@ -54,6 +54,8 @@ extern "C" {
 #include <camera_info_manager/camera_info_manager.h>
 #include <boost/algorithm/string/trim.hpp>
 
+#include <yaml-cpp/yaml.h>
+
 #include <dynamic_reconfigure/server.h>
 #include <dynamic_reconfigure/SensorLevels.h>
 #include <tf/transform_listener.h>
@@ -61,6 +63,7 @@ extern "C" {
 #include <tf2_ros/transform_broadcaster.h>
 #include <camera_aravis/CameraAravisConfig.h>
 #include <camera_aravis/CameraAutoInfo.h>
+#include <camera_aravis/CameraDiagnostics.h>
 #include <camera_aravis/ExtendedCameraInfo.h>
 
 #include <camera_aravis/get_integer_feature_value.h>
@@ -89,7 +92,12 @@ public:
 private:
   bool verbose_ = false;
   std::string guid_ = "";
+
   bool use_ptp_stamp_ = false;
+  std::string ptp_enable_feature_ = "GevIEEE1588";
+  std::string ptp_status_feature_ = "GevIEEE1588Status";
+  std::string ptp_set_cmd_feature_ = "";
+ 
   bool pub_ext_camera_info_ = false;
   bool pub_tf_optical_ = false;
 
@@ -168,6 +176,8 @@ protected:
 
   void publishTfLoop(double rate);
 
+  void readAndPublishCameraDiagnostics(double rate) const;
+
   void discoverFeatures();
 
   static void parseStringArgs(std::string in_arg_string, std::vector<std::string> &out_args);
@@ -182,6 +192,8 @@ protected:
   // integers are integers, doubles are doubles, etc.
   void writeCameraFeaturesFromRosparam();
 
+  void onShutdownTriggered(const ros::TimerEvent&);
+
   std::unique_ptr<dynamic_reconfigure::Server<Config> > reconfigure_server_;
   boost::recursive_mutex reconfigure_mutex_;
 
@@ -195,6 +207,13 @@ protected:
   geometry_msgs::TransformStamped tf_optical_;
   std::thread tf_dyn_thread_;
   std::atomic_bool tf_thread_active_;
+
+  std::string diagnostic_yaml_url_ = "";
+  double diagnostic_publish_rate_ = 0.1;
+  YAML::Node  diagnostic_features_;
+  ros::Publisher diagnostic_pub_;
+  std::thread diagnostic_thread_;
+  std::atomic_bool diagnostic_thread_active_;
 
   CameraAutoInfo auto_params_;
   ros::Publisher auto_pub_;
@@ -215,6 +234,9 @@ protected:
   size_t n_buffers_ = 0;
 
   std::unordered_map<std::string, const bool> implemented_features_;
+
+  ros::Timer shutdown_trigger_;
+  double shutdown_delay_s_;
 
   struct
   {
