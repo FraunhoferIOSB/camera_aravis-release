@@ -1,3 +1,26 @@
+## camera_aravis (noetic) - 4.1.0-1
+
+The packages in the `camera_aravis` repository were released into the `noetic` distro by running `/home/boi87908/.local/bin/bloom-release camera_aravis --rosdistro noetic` on `Tue, 12 Mar 2024 07:26:24 -0000`
+
+The `camera_aravis` package was released.
+
+Version of package(s) in repository `camera_aravis`:
+
+- upstream repository: https://github.com/FraunhoferIOSB/camera_aravis.git
+- release repository: https://github.com/FraunhoferIOSB/camera_aravis-release.git
+- rosdistro version: `4.0.5-3`
+- old version: `4.0.5-3`
+- new version: `4.1.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.11.2`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.22.2`
+- rosdistro version: `0.9.0`
+- vcstools version: `0.1.42`
+
+
 ## camera_aravis (noetic) - 4.0.5-3
 
 The packages in the `camera_aravis` repository were released into the `noetic` distro by running `/home/boi87908/.local/bin/bloom-release camera_aravis --rosdistro noetic` on `Thu, 01 Feb 2024 08:10:36 -0000`
